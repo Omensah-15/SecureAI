@@ -1,13 +1,4 @@
 """End-to-end tests of the Streamlit UI (streamlit.testing AppTest).
-
-These exist because the SANITIZE-choice buttons (Redact & Continue / Edit
-Prompt / Cancel) once rendered but did nothing: Streamlit re-runs the whole
-script on every click, and the buttons were drawn from code that only ran on
-the run that received the prompt. Unit tests of engine.py cannot see that.
-
-Detectors and the LLM are faked; the app, the policy and the engine's
-pipeline code are the real ones. `fake_llm.sent` records exactly what
-would have been sent to the LLM.
 """
 
 from __future__ import annotations
