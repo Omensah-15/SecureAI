@@ -5,18 +5,6 @@ on 2026-09-22, not assumed). These pin down the exact real-world label
 conventions so a future change to engine.py's interpretation logic can't
 silently break behavior for the specific models this project uses.
 
-Confirmed id2label values:
-  prompt-injection: {'0': 'SAFE', '1': 'INJECTION'}
-  pii-detection:     17 entity types incl. PASSWORD, CREDITCARDNUMBER,
-                      SOCIALNUM, TAXNUM, ACCOUNTNUM, DRIVERLICENSENUM,
-                      IDCARDNUM, EMAIL, GIVENNAME, SURNAME, CITY, STREET,
-                      BUILDINGNUM, ZIPCODE, DATEOFBIRTH, TELEPHONENUM,
-                      USERNAME, plus 'O' (non-entity)
-  output-safety:     {'0':'H','1':'H2','2':'HR','3':'OK','4':'S',
-                       '5':'S3','6':'SH','7':'V','8':'V2'}
-  toxicity:          {'0':'toxic','1':'severe_toxic','2':'obscene',
-                       '3':'threat','4':'insult','5':'identity_hate'}
-                      — no safe/negative label exists in this model at all
 """
 
 from __future__ import annotations
