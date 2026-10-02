@@ -1,14 +1,5 @@
 """Tests for _interpret_binary_label and the conservative-fallback
 behavior in the detector methods that depend on it.
-
-This exists because each of the four downloaded models may use a
-different label convention (SAFE/INJECTION, LABEL_0/LABEL_1,
-benign/malicious, etc.) that can only be confirmed by actually running
-the real model — see verify_models.py. This test suite guarantees the
-interpretation logic itself is correct for every convention it claims to
-support, and that genuinely unrecognized labels fail toward caution
-(flagged) rather than toward silence (ignored), which is the correct
-default for a security gateway.
 """
 
 from __future__ import annotations
