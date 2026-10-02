@@ -1,13 +1,5 @@
 """
 SecureAI configuration module.
-
-Single source of truth for every tunable value in the system: model file
-locations, risk-scoring weights, policy thresholds, and LLM provider
-selection. Nothing outside this module should read `os.environ` directly —
-every other module imports `settings` from here.
-
-All values are overridable via environment variables or a `.env` file in
-the project root (see `.env.example`).
 """
 
 from __future__ import annotations
