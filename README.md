@@ -7,33 +7,11 @@ SecureAI sits **between a user and an LLM**. Every prompt is scanned before it r
 ## 1. What We Built
 
 A Streamlit chat app backed by a Python security engine.
+<p align="center">
+  <img src="docs/pipeline-sketch.png" alt="pipeline-sketch" width="900">
+</p>
 
-```
-User prompt
-    │
-    ▼
-┌─────────────────────────────────────────────┐
-│ 1. Normalize text (unicode, whitespace)     │
-│ 2. Detect: secrets · PII · injection ·      │
-│            encoded payloads · harmful       │
-│ 3. Understand intent (analyze vs. obey)     │
-│ 4. Risk score (0-100) → policy decision     │
-│ 5. ALLOW / SANITIZE (redact) / BLOCK        │
-└─────────────────────────────────────────────┘
-    │ (only if allowed)
-    ▼
-   LLM
-    │
-    ▼
-┌─────────────────────────────────────────────┐
-│ 6. Scan the response: secrets, PII, unsafe  │
-│    output, system-prompt leakage            │
-│ 7. ALLOW / SANITIZE / BLOCK again           │
-└─────────────────────────────────────────────┘
-    │
-    ▼
-Final response  (every step is written to the audit log)
-```
+
 
 **Features**
 
