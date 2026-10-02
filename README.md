@@ -1,9 +1,9 @@
-## SecureAI: From User Intent to Safe Answer
+## SecureAI
 Inspect user intent before execution and inspect the AI’s answer before delivery.
 
 A security gateway for LLM chat. It checks every prompt before it reaches the model and every reply before it reaches the user, then decides to **ALLOW**, **SANITIZE** or **BLOCK**.
 
-
+### System Flow Chart
 <p align="center">
   <img src="docs/pipeline-sketch.png" alt="SecureAI pipeline" width="900">
 </p>
