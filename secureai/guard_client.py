@@ -1,26 +1,5 @@
 """
-Thin adapter between SecureAI's engine and the organizers' hosted Guard API.
-
-The engine's detectors were written against four local Hugging Face
-pipelines (`injection_clf`, `pii_clf`, `output_safety_clf`, `toxicity_clf`)
-and consume their raw output shapes. Rather than change any detector, this
-module exposes four callables with the SAME call signature and the SAME
-return shapes, backed by the Guard's two endpoints:
-
-    POST {GUARD_URL}/v1/check/prompt     (text a user typed)
-    POST {GUARD_URL}/v1/check/response   (text the model produced)
-
-Everything API-specific lives here: auth header, endpoint paths, the 4,000
-character limit, retries, error mapping, response validation. Nothing in
-the engine knows the Guard's wire format.
-
-Failure policy (deliberate): this module NEVER returns "looks fine" when the
-Guard could not actually give a verdict. Every failure (missing config,
-network error, timeout, 401/413/429/5xx, malformed body, partial result)
-raises GuardError. engine._run_classifier_safely re-raises it so the app's
-existing fail-CLOSED handling withholds the prompt/response.
-
-Error messages never include the token or the response body.
+Thin adapter between SecureAI's engine and the hosted Guard API.
 """
 
 from __future__ import annotations
