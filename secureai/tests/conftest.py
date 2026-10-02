@@ -1,11 +1,5 @@
 """
 Shared pytest fixtures for the SecureAI test suite.
-
-`engine` gives every test a SecurityEngine with the four ML classifiers
-replaced by MagicMocks (tests don't need — and shouldn't need — your
-downloaded model weights to verify the engine's own logic) and an
-isolated, empty audit database so tests never see each other's writes or
-touch your real audit_log.db.
 """
 
 from __future__ import annotations
