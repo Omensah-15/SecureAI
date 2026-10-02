@@ -1,16 +1,5 @@
 """
 SecureAI security engine.
-
-Owns every part of the system that is not UI: model loading, the four
-ML-based detectors, the Gitleaks secret scanner, the deterministic risk
-scoring function, the policy decision, sanitization, the LLM provider
-abstraction, and audit logging.
-
-This module has zero UI framework imports and is fully usable headless
-(from a test suite, an eval script, or a different frontend entirely).
-The policy decision in `_score_and_decide` is a pure function of already
--computed findings: no detector or LLM call happens inside it, so it is
-cheap to unit test and cannot be silently bypassed by a model's output.
 """
 
 from __future__ import annotations
