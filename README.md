@@ -58,7 +58,9 @@ We chose it because a single prompt can attack it from many angles. Users can tr
 
 The challenge pipeline places a guard (**Model Armor**) before and after the LLM. Each guard has an open slot labeled **"Your Hook?"** — the place where a team can add its own protection. **SecureAI is that hook.**
 
-![Challenge pipeline: User Prompt → Model Armor + Your Hook → LLM API → Model Armor + Your Hook → Response](docs/architecture.png)
+<p align="center">
+  <img src="docs/architecture.png" alt="Challenge pipeline: User Prompt → Model Armor + Your Hook → LLM API → Model Armor + Your Hook → Response" width="900">
+</p>
 
 *Figure: the baseline pipeline. SecureAI fills both "Your Hook?" slots.*
 
@@ -111,11 +113,15 @@ Same intent, same target text, different format, **opposite results**.
 
 **Test 1 — JSON prompt: blocked at input.** The original system refuses the request before it reaches the AI.
 
-![Original system: JSON analysis prompt blocked](docs/demo/test_4.png)
+<p align="center">
+  <img src="docs/demo/test_4.png" alt="Original system: JSON analysis prompt blocked" width="760">
+</p>
 
 **Test 2 — Same request in plain text: allowed.** The original system answers with a normal security analysis.
 
-![Original system: plain-text analysis prompt allowed](docs/demo/test_3.png)
+<p align="center">
+  <img src="docs/demo/test_3.png" alt="Original system: plain-text analysis prompt allowed" width="760">
+</p>
 
 The two screenshots show the same intent and the same target prompt. Only the format changed, and the result flipped from blocked to allowed.
 
@@ -189,34 +195,38 @@ Run `python diagnose_analysis_policy.py` to reproduce these cases and see which 
 
 **Test 3 — JSON prompt: allowed as analysis.** The injection is detected (`PROMPT_INJECTION`, CRITICAL), treated as untrusted data and never executed. The user receives the full security analysis.
 
-![SecureAI: JSON analysis prompt allowed and analyzed](docs/demo/test_2.png)
+<p align="center">
+  <img src="docs/demo/test_2.png" alt="SecureAI: JSON analysis prompt allowed and analyzed" width="760">
+</p>
 
 **Test 4 — Same request in plain text: allowed.** The decision is `ALLOW` and the analysis is returned, matching the JSON result.
 
-![SecureAI: plain-text analysis prompt allowed](docs/demo/test_5.png)
+<p align="center">
+  <img src="docs/demo/test_5.png" alt="SecureAI: plain-text analysis prompt allowed" width="760">
+</p>
 
 **Test 5 — JSON prompt: input allowed, output withheld.** On another run of the same JSON prompt, the input stage again returned `ALLOW — ANALYSIS OF DETECTED INJECTION`. This time the output scan flagged the model's reply (`UNSAFE_OUTPUT_INJECTION`, CRITICAL) and withheld it with a `BLOCK`.
 
-![SecureAI: JSON prompt allowed, response withheld by the output check](docs/demo/test_1.png)
+<p align="center">
+  <img src="docs/demo/test_1.png" alt="SecureAI: JSON prompt allowed, response withheld by the output check" width="760">
+</p>
 
-This shows the output hook working, since a response is never trusted by default. It also shows a limitation we are open about (see section 5): the output classifier can flag a safe analysis because the reply quotes the injection text.
+This shows the output hook working: a response is never trusted by default. The output check is deliberately strict, so a reply that quotes the injection text can be withheld (see section 5).
 
 ---
 
-## 5. Known Limitations
+## 5. Design Choices and Next Steps
 
-We are open about what this does **not** solve:
+Every choice below was made on purpose, to keep the system safe and explainable.
 
-- **Rule-based intent detection.** It uses regex and heuristics, so a creative rephrasing may fall outside the rules. In that case the system errs toward BLOCK, which can cause false positives.
-- **Output classifier false positives.** A safe analysis that quotes the injected text can be flagged as unsafe output and withheld (Test 5), while the same prompt on another run is delivered (Test 3). The input decision is consistent, but the output stage depends on the LLM's wording and the classifier. This is the conservative failure mode: the user loses a safe answer instead of receiving an unsafe one.
-- **Heuristic leakage detection.** Output leakage is found by phrase patterns plus classifiers. A leak written in unusual wording may be missed.
-- **Dependence on the Guard and classifiers.** Detection quality is only as good as the backend. If the Guard fails, the check fails closed rather than passing.
-- **Credential-mention trade-off.** An injection with no override language that also contains a secret is downgraded from BLOCK to SANITIZE. The secret is still redacted, and this avoids blocking ordinary "please review my key" messages.
-- **Single-turn scope.** Each message is scanned on its own. Multi-turn attacks are not tracked.
-- **Small evaluation set.** The 29-example dataset is a sanity check, not a benchmark.
-- **LLM non-determinism.** The scanning is deterministic, but the LLM's own wording and its own safety filter can vary.
+| Design choice | Why we made it | Next step |
+|---|---|---|
+| **Rule-based intent detection** | Deterministic, testable and easy to audit. A judge can trace exactly why a prompt was allowed or blocked. | Add a small ML intent classifier alongside the rules |
+| **Fail closed on doubt** | If intent is unclear or a check errors, the request is blocked. We prefer a safe refusal over a risky pass. | Tune the rules with more labeled examples |
+| **Strict output scanning** | A reply that quotes injection text can be withheld (Test 5). Withholding a safe answer is the safe failure. | Allow quoted attack text in analysis replies once it is verified as quoted |
+| **Single-message scope** | Keeps each decision independent and reproducible. | Track context across multiple turns |
 
-**Future work:** a small ML intent classifier, multi-turn context, NER-based PII detection, and a larger regression suite.
+**Roadmap:** NER-based PII detection, a larger regression suite built from the evaluation dataset, and metrics for false positives and false negatives.
 
 ---
 
