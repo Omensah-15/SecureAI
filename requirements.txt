@@ -1,0 +1,27 @@
+# Core config & validation — exact versions confirmed working during development
+pydantic==2.13.5
+pydantic-settings==2.15.0
+
+# Frontend — exact version confirmed working (real server boot tested)
+streamlit==1.64.0
+
+# ML detectors — minimum versions; exact pins not verified in this environment
+# (no network access to Hugging Face / no GPU during development), but these
+# floors are required for the model architectures used (DeBERTa-v3, ONNX export).
+transformers>=4.44.0
+torch>=2.2.0
+optimum[onnxruntime]>=1.20.0
+
+# LLM providers — only the one matching your LLM_PROVIDER setting is actually
+# imported at runtime (engine.py imports these lazily inside each provider
+# class), but installing all three costs little and avoids surprises if you
+# switch providers later.
+anthropic>=0.34.0
+openai>=1.40.0
+httpx>=0.27.0
+
+# Testing
+pytest==9.1.1
+
+# Secret scanning (gitleaks) is a separate Go binary, not a Python package —
+# see the README for the install command.
