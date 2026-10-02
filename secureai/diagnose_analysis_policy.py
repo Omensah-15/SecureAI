@@ -1,21 +1,4 @@
 """Diagnostic for the "analysis of detected injection" policy.
-
-Run from the project folder with your real models:
-
-    python3 diagnose_analysis_policy.py
-
-It changes nothing. For each prompt it prints:
-
-  * which engine.py is actually loaded and whether it contains the
-    current policy code (a stale copy or a cached Streamlit server shows
-    up here immediately);
-  * the final decision and the exact policy gate that vetoed the
-    analysis path, taken from the engine's own DEBUG log;
-  * what the real injection classifier says about the user's OUTER
-    request text (the one gate that depends on the model), in the form the
-    policy sends it and in two other renderings of the same sentence.
-
-Paste the whole output back if any prompt still blocks.
 """
 
 from __future__ import annotations
