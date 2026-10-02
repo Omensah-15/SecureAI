@@ -1,10 +1,5 @@
 """
-SecureAI Streamlit frontend.
-
-Owns UI only. Every security decision, model call, and audit write happens
-in `engine.py` — this file never computes a risk score or decides a
-policy outcome itself, it only renders what the engine already decided
-and forwards the user's ALLOW/EDIT/CANCEL choice back to it.
+SecureAI Streamlit UI
 """
 
 from __future__ import annotations
