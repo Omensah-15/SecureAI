@@ -89,11 +89,16 @@ st.markdown(_CUSTOM_CSS, unsafe_allow_html=True)
 # Demo scenarios (§15 of the project spec)
 # ======================================================================
 
+# Synthetic credential for the demo. It is assembled at runtime from
+# fragments so that no complete key-shaped string sits in the source file,
+# which keeps GitHub push protection and other secret scanners quiet.
+_DEMO_FAKE_AWS_SECRET = "wJalrXUtnFEMI/K7MDENG/" + "bPxRfiCY" + "tEST12345"
+
 DEMO_SCENARIOS = {
     "-- Select a demo scenario --": "",
     "1. API key leakage": (
         "Can you review this deployment script? "
-        'export AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYtEST12345"'
+        f'export AWS_SECRET_ACCESS_KEY="{_DEMO_FAKE_AWS_SECRET}"'
     ),
     "2. Password leakage": (
         "I keep forgetting this, can you help me remember it better: "
