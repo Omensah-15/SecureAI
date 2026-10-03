@@ -3,8 +3,8 @@ Inspect user intent before execution and inspect the AI’s answer before delive
 
 A security gateway for LLM chat. It checks every prompt before it reaches the model and every reply before it reaches the user, then decides to **ALLOW**, **SANITIZE** or **BLOCK**.
 
-**Live Demo:** [SecureAI — Our Implementation](https://secureai-vzsgvhpmzdwandermtbz7f.streamlit.app/)  
-**Baseline:** [Organizer Guard — Provided System](https://secureai-jcdebn3scypzevymqiwz2x.streamlit.app/)
+**Live Demo:** [Our Implementation](https://secureai-vzsgvhpmzdwandermtbz7f.streamlit.app/)  
+**Baseline:** [OProvided System](https://secureai-jcdebn3scypzevymqiwz2x.streamlit.app/)
 
 
 ### System Flow Chart
