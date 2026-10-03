@@ -1,24 +1,5 @@
 """
 engine.py - secured chat engine for the SecureAI hackathon.
-
-Every user message is checked by the organizer's Guard API before it reaches
-the LLM, and every LLM reply is checked by the Guard API before it reaches
-the user. If the Guard cannot give a clear verdict, the message or reply is
-withheld (fail closed).
-
-Configuration comes only from `.env`:
-
-    GUARD_URL     base URL of the Guard API (required)
-    GUARD_TOKEN   team token for the Guard API (required)
-    LLM_API_KEY   organizer LLM key (required)
-
-Optional (the provider is detected from the key prefix when not set):
-
-    LLM_PROVIDER  openai | anthropic | groq | gemini | openrouter | custom
-    LLM_BASE_URL  OpenAI-compatible base URL (required for "custom")
-    LLM_MODEL     model name
-
-Run `python engine.py --check` to verify the whole chain from the terminal.
 """
 
 from __future__ import annotations
