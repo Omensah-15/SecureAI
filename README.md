@@ -11,7 +11,7 @@ Built for the **SecureAI Hackath🔐n — Challenge 3**.
 ## Problem
 
 <p align="center">
-  <img src="docs/architecture.png" alt="architecture.png" width="49%">
+  <img src="docs/architecture.png" alt="architecture.png">
 </p>
 
 Challenge 3 provided a SecureAI Guard and an LLM, and asked teams to add
