@@ -6,7 +6,7 @@ the model; every response is scanned again before it reaches the user.
 The security decision (ALLOW / SANITIZE / BLOCK) is made by a
 deterministic policy engine, never by an LLM.
 
-Built for the **SecureAI Hackathon — Challenge 3**.
+Built for the **SecureAI Hackath🔐n — Challenge 3**.
 
 ## Problem
 
