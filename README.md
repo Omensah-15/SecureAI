@@ -22,6 +22,8 @@ different representations. We found that the Guard's decision can change
 depending on how the malicious instruction is represented, not just on
 whether it is malicious.
 
+![SecureAI Guard — Business Data Injection Allowed](docs/Their_guard_response.png)
+
 For example:
 
 - A direct prompt injection (plain text, imperative instruction) was
