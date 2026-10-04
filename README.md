@@ -96,6 +96,40 @@ instruction happens to be formatted. A layer that only checks plain-text
 prompts misses malicious content carried inside the data the model is
 asked to process.
 
+# Models Used
+
+SecureAI uses four pretrained, locally-run models for detection, plus one
+external tool for secret scanning. No models are trained from scratch.
+
+| Detector | Model | Link |
+|---|---|---|
+| Prompt Injection | ProtectAI/deberta-v3-small-prompt-injection-v2 | https://huggingface.co/protectai/deberta-v3-small-prompt-injection-v2 |
+| PII Detection | iiiorg/piiranha-v1-detect-personal-information | https://huggingface.co/iiiorg/piiranha-v1-detect-personal-information |
+| Output Safety | KoalaAI/Text-Moderation | https://huggingface.co/KoalaAI/Text-Moderation |
+| Toxicity | unitary/toxic-bert | https://huggingface.co/unitary/toxic-bert |
+
+| Tool | Purpose | Link |
+|---|---|---|
+| Gitleaks | Secret and credential scanning | https://github.com/gitleaks/gitleaks |
+
+## Notes
+
+- **Prompt Injection** — DeBERTa-v3-small fine-tuned to classify text as
+  `SAFE` or `INJECTION`. Runs on the raw prompt before it reaches the LLM.
+- **PII Detection** — Token-classification model that locates personal
+  data (email, phone, address, ID numbers, etc.) and marks exact spans
+  for redaction.
+- **Output Safety** — 9-category classifier (hate, harassment, violence,
+  sexual content, self-harm, or safe) applied to the LLM's response
+  before it reaches the user.
+- **Toxicity** — BERT-based multi-label classifier (toxic, severe toxic,
+  obscene, threat, insult, identity hate) used as a second, independent
+  signal on model output.
+
+None of these models make the final decision on their own. Each produces
+findings (category, confidence, severity), which a deterministic policy
+engine combines into `ALLOW`, `SANITIZE`, or `BLOCK`.
+
 ## Project layout
 
 ```
