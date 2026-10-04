@@ -283,4 +283,3 @@ export PATH="$HOME/.local/bin:$PATH"
 streamlit run app.py
 ```
 streamlit run app.py
-```
