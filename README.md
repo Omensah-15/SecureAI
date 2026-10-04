@@ -42,7 +42,7 @@ SecureAI does not replace the existing Guard. It adds a second,
 independent security layer behind it.
 
 <p align="center">
-  <img src="docs/solution_flowchart.png" alt="solution_flowchart.png">
+  <img src="https://github.com/Omensah-15/SecureAI/raw/911cf094acaa1ac0bde5013edad2660a1ec6bdaf/docs/solution_flowchart.png" alt="solution_flowchart.png">
 </p>
 
 - The system scans both incoming prompts and outgoing LLM responses.
