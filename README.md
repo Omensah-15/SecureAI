@@ -63,8 +63,25 @@ independent security layer behind it.
   analyzed. Legitimate security analysis of untrusted text should not be
   blocked just because that text contains injection-like phrasing.
 
-## Demo: Before and After
+## Before and After: Business Data Scenario
 
+We tested both systems with a customer support message containing **business data and an embedded prompt injection**.
+
+### Before — SecureAI Guard
+
+**Business data with an embedded malicious instruction was allowed through to the LLM.**
+
+![SecureAI Guard — Business Data Injection Allowed](images/guard-business-data.png)
+
+> **Result:** The Guard allowed the request, and the LLM followed the embedded instruction.
+
+### After — SecureAI
+
+**The same business data was inspected by our additional security layer.**
+
+![SecureAI — Business Data Injection Blocked](images/secureai-business-data.png)
+
+> **Result:** SecureAI detected the embedded prompt injection and blocked the request before it reached the LLM.
 
 
 ## What We Found
