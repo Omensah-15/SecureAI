@@ -63,38 +63,9 @@ independent security layer behind it.
   analyzed. Legitimate security analysis of untrusted text should not be
   blocked just because that text contains injection-like phrasing.
 
-## Before and After
-
-```text
-Before:
-
-User
- ↓
-SecureAI Guard
- ↓
-ALLOW
- ↓
-LLM
+## Demo: Before and After
 
 
-After:
-
-User
- ↓
-SecureAI Guard
- ↓
-SecureAI Security Engine
- ↓
-Detection + Security Policies
- ↓
-ALLOW / SANITIZE / BLOCK
- ↓
-LLM
- ↓
-Response Security Check
- ↓
-User
-```
 
 ## What We Found
 
