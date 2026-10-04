@@ -6,6 +6,117 @@ the model; every response is scanned again before it reaches the user.
 The security decision (ALLOW / SANITIZE / BLOCK) is made by a
 deterministic policy engine, never by an LLM.
 
+Built for the **SecureAI Hackathon — Challenge 3**.
+
+## Problem
+
+Challenge 3 provided a SecureAI Guard and an LLM, and asked teams to add
+an additional security layer around them.
+
+We tested the Guard by sending the same prompt-injection intent in
+different representations. We found that the Guard's decision can change
+depending on how the malicious instruction is represented, not just on
+whether it is malicious.
+
+For example:
+
+- A direct prompt injection (plain text, imperative instruction) was
+  blocked by the Guard.
+- A semantically equivalent injection embedded inside structured data,
+  such as JSON or CSV, was allowed by the Guard.
+
+An allowed request then continues on to the LLM.
+
+This is a **Guard detection gap**, not confirmation that the LLM itself
+can be jailbroken. The downstream LLM may still refuse the request on its
+own. The gap is that the Guard's decision depends on format, when it
+should depend on intent.
+
+## Our Solution
+
+SecureAI does not replace the existing Guard. It adds a second,
+independent security layer behind it.
+
+- The system scans both incoming prompts and outgoing LLM responses.
+- It uses four specialized pretrained detectors:
+  1. Prompt Injection
+  2. PII Detection
+  3. Toxicity
+  4. Output Safety
+- The detectors identify potential security risks in the text.
+- A deterministic security policy engine evaluates the findings from all
+  detectors and makes the final `ALLOW`, `SANITIZE`, or `BLOCK` decision.
+  The decision is never made by an LLM.
+- The system looks for malicious instructions even when they are
+  embedded inside structured data such as JSON, CSV, or other content,
+  not only in plain imperative text.
+- It distinguishes between an instruction that is trying to control the
+  AI and an instruction that is simply present as content to be
+  analyzed. Legitimate security analysis of untrusted text should not be
+  blocked just because that text contains injection-like phrasing.
+
+## Before and After
+
+```text
+Before:
+
+User
+ ↓
+SecureAI Guard
+ ↓
+ALLOW
+ ↓
+LLM
+
+
+After:
+
+User
+ ↓
+SecureAI Guard
+ ↓
+SecureAI Security Engine
+ ↓
+Detection + Security Policies
+ ↓
+ALLOW / SANITIZE / BLOCK
+ ↓
+LLM
+ ↓
+Response Security Check
+ ↓
+User
+```
+
+## What We Found
+
+We used a harmless marker, `CANARY-7731`, to demonstrate the detection
+gap without using a real secret or a real attack payload.
+
+```text
+Direct injection → Guard BLOCK
+
+Equivalent injection embedded in JSON/CSV
+→ Guard ALLOW
+→ SecureAI detects it
+→ SecureAI BLOCK
+→ LLM is never reached
+```
+
+`CANARY-7731` is not a real secret, and this does not demonstrate that
+the LLM was jailbroken. It only shows that an injection payload can
+reach the Guard in a format the Guard allows, and that SecureAI catches
+it before the LLM is reached.
+
+## Why This Matters
+
+Real applications process untrusted content from many sources: uploaded
+documents, customer records, API responses, CSV exports, JSON payloads,
+file metadata, and more. Security should not depend on how an
+instruction happens to be formatted. A layer that only checks plain-text
+prompts misses malicious content carried inside the data the model is
+asked to process.
+
 ## Project layout
 
 ```
