@@ -22,7 +22,7 @@ different representations. We found that the Guard's decision can change
 depending on how the malicious instruction is represented, not just on
 whether it is malicious.
 
-![SecureAI Guard — Business Data Injection Allowed](docs/Their_guard_response.png)
+![SecureAI Guard — Business Data Injection Allowed](docs/what_we_found.png)
 
 For example:
 
