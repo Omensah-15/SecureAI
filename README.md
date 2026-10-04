@@ -17,7 +17,7 @@ secureai/
 ├── diagnose_injection_fp.py  # bisection tool for injection-classifier false positives
 ├── requirements.txt
 ├── .env.example
-├── models/               # your downloaded model folders go here (not in version control)
+├── models/               # your downloaded model folders go here
 │   ├── prompt-injection/
 │   ├── pii-detection/
 │   ├── output-safety/
