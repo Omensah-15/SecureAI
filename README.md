@@ -144,28 +144,29 @@ secureai/
     └── results.json             # written by run_eval.py (generated, not checked in)
 ```
 
-# SecureAI — Getting Started
 
-## 1. Enter the project
+## Getting Started
+
+### 1. Enter the project
 
 ```bash
 cd secureai
 ```
 
-## 2. Create a virtual environment
+### 2. Create a virtual environment
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-## 3. Install Python dependencies
+### 3. Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4. Install Gitleaks (secret scanner)
+### 4. Install Gitleaks (secret scanner)
 
 ```bash
 curl -sL -o /tmp/gitleaks.tar.gz \
@@ -178,7 +179,7 @@ export PATH="$HOME/.local/bin:$PATH"   # add this line to ~/.bashrc too
 gitleaks version
 ```
 
-## 5. Download the four models
+### 5. Download the four models
 
 ```bash
 pip install huggingface_hub
@@ -197,7 +198,7 @@ hf download unitary/toxic-bert \
   --local-dir ./models/toxicity
 ```
 
-## 6. Set up your `.env` file
+### 6. Set up your `.env` file
 
 ```bash
 cat > .env << 'EOF'
@@ -210,7 +211,7 @@ EOF
 
 Get a free Groq key (no card needed) at https://console.groq.com/keys
 
-## 7. Run the tests
+### 7. Run the tests
 
 ```bash
 pytest tests/ -v
@@ -218,7 +219,7 @@ pytest tests/ -v
 
 Should end with all tests passed — no models needed for this step.
 
-## 8. Verify your real models work
+### 8. Verify your real models work
 
 ```bash
 python3 verify_models.py
@@ -226,7 +227,7 @@ python3 verify_models.py
 
 Loads your real downloaded models and checks each one. Should end with all `PASS`.
 
-## 9. Run the app
+### 9. Run the app
 
 ```bash
 streamlit run app.py
@@ -234,7 +235,7 @@ streamlit run app.py
 
 Opens at `http://localhost:8501`. First load is slower while models load into memory.
 
-## 10. (Optional) Run the accuracy evaluation
+### 10. (Optional) Run the accuracy evaluation
 
 ```bash
 python -m eval.run_eval
@@ -248,5 +249,7 @@ python -m eval.run_eval
 cd secureai
 source venv/bin/activate
 export PATH="$HOME/.local/bin:$PATH"
+streamlit run app.py
+```
 streamlit run app.py
 ```
