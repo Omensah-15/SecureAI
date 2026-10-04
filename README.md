@@ -32,17 +32,3 @@ secureai/
     ├── run_eval.py             # runs the dataset through the real engine, reports metrics
     └── results.json             # written by run_eval.py (generated, not checked in)
 ```
-
-## Setup
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-cp .env.example .env
-# edit .env — set ANTHROPIC_API_KEY (or OPENAI_API_KEY / LOCAL_LLM_BASE_URL
-# depending on which LLM_PROVIDER you choose)
-```
-```
-
