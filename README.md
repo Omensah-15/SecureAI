@@ -283,3 +283,10 @@ export PATH="$HOME/.local/bin:$PATH"
 streamlit run app.py
 ```
 streamlit run app.py
+
+
+## Team Members
+
+1. **Bernice Dompreh** — [bernicedompreh08@gmail.com](mailto:bernicedompreh08@gmail.com)
+2. **ADJEI-DANSO NANA YAW OWUSU** — [Nadjeidanso@gmail.com](mailto:Nadjeidanso@gmail.com)
+3. **Obed Mensah** — [heavenzlebron7@gmail.com](mailto:heavenzlebron7@gmail.com)
