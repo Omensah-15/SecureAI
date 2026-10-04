@@ -14,7 +14,7 @@ Built for the **SecureAI Hackath🔐n — Challenge 3**.
   <img src="docs/architecture.png" alt="architecture">
 </p>
 
-Challenge 3 provided a SecureAI Guard and an LLM, and asked teams to add
+Challenge 3 provided a SecureAI Guard(Model Armor) and an LLM, and asked teams to add
 an additional security layer around them.
 
 We tested the Guard by sending the same prompt-injection intent in
