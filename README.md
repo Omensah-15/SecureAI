@@ -10,6 +10,12 @@ Built for the **SecureAI Hackath🔐n — Challenge 3**.
 
 ## Problem
 
+<p align="center">
+  <img src="docs/demo/test_4.png" alt="Original system: JSON prompt blocked" width="49%">
+  <img src="docs/demo/test_3.png" alt="Original system: plain-text prompt allowed" width="49%">
+</p>
+<p align="center"><em>Original system. Left: JSON blocked. Right: plain text allowed.</em></p>
+
 Challenge 3 provided a SecureAI Guard and an LLM, and asked teams to add
 an additional security layer around them.
 
