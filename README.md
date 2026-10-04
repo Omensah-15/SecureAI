@@ -11,7 +11,7 @@ Built for the **SecureAI Hackath🔐n — Challenge 3**.
 ## Problem
 
 <p align="center">
-  <img src="docs/architecture.png" alt="architecture.png">
+  <img src="docs/architecture.png" alt="architecture">
 </p>
 
 Challenge 3 provided a SecureAI Guard and an LLM, and asked teams to add
@@ -40,6 +40,10 @@ should depend on intent.
 
 SecureAI does not replace the existing Guard. It adds a second,
 independent security layer behind it.
+
+<p align="center">
+  <img src="docs/solution_flowchart.png" alt="solution_flowchart.png">
+</p>
 
 - The system scans both incoming prompts and outgoing LLM responses.
 - It uses four specialized pretrained detectors:
