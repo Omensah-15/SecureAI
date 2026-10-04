@@ -86,7 +86,8 @@ DEMO_SCENARIOS = {
     "-- Select a demo scenario --": "",
     "1. API key leakage": (
         "Can you review this deployment script? "
-        'export AWS_SECRET_ACCESS_KEY="QxqL3pBqTL4VdAhONQZ48LYAO2gh3L7MbusRMPT2"'
+        'export AWS_SECRET_ACCESS_KEY='
+        '"QxqL3pBqTL4VdAhONQZ48LYAO2gh3L7MbusRMPT2"'
     ),
     "2. Password leakage": (
         "I keep forgetting this, can you help me remember it better: "
