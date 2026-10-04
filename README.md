@@ -71,7 +71,7 @@ We tested both systems with a customer support message containing **business dat
 
 **Business data with an embedded malicious instruction was allowed through to the LLM.**
 
-![SecureAI Guard — Business Data Injection Allowed](images/guard-business-data.png)
+![SecureAI Guard — Business Data Injection Allowed](docs/Their_guard_response.png)
 
 > **Result:** The Guard allowed the request, and the LLM followed the embedded instruction.
 
@@ -79,7 +79,7 @@ We tested both systems with a customer support message containing **business dat
 
 **The same business data was inspected by our additional security layer.**
 
-![SecureAI — Business Data Injection Blocked](images/secureai-business-data.png)
+![SecureAI — Business Data Injection Blocked](docs/our_solution_test.png)
 
 > **Result:** SecureAI detected the embedded prompt injection and blocked the request before it reached the LLM.
 
