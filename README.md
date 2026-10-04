@@ -75,7 +75,7 @@ We tested both systems with a customer support message containing **business dat
 
 > **Result:** The Guard allowed the request, and the LLM followed the embedded instruction.
 
-### After — SecureAI
+### After — SecureAI(Our Hook)
 
 **The same business data was inspected by our additional security layer.**
 
