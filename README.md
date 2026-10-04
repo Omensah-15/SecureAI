@@ -36,7 +36,7 @@ can be jailbroken. The downstream LLM may still refuse the request on its
 own. The gap is that the Guard's decision depends on format, when it
 should depend on intent.
 
-## Our Solution
+## Our Solution - Our Hook
 
 SecureAI does not replace the existing Guard. It adds a second,
 independent security layer behind it.
