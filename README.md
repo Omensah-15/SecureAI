@@ -56,7 +56,6 @@ independent security layer behind it.
 - The detectors identify potential security risks in the text.
 - A deterministic security policy engine evaluates the findings from all
   detectors and makes the final `ALLOW`, `SANITIZE`, or `BLOCK` decision.
-  The decision is never made by an LLM.
 - The system looks for malicious instructions even when they are
   embedded inside structured data such as JSON, CSV, or other content,
   not only in plain imperative text.
